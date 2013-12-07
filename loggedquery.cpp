@@ -5,6 +5,11 @@
 
 #include "loggedquery.h"
 
+LoggedQuery::LoggedQuery(const QString& query,QSqlDatabase db)
+    : QSqlQuery(query, db) {
+    if( query != "" ) logQuery(isActive());
+}
+
 bool LoggedQuery::exec(const QString& query) {
   bool result = QSqlQuery::exec(query);
   logQuery(result);

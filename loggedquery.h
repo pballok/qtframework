@@ -11,10 +11,7 @@ class LoggedQuery : public QSqlQuery {
  public:
   LoggedQuery(QSqlResult* result) : QSqlQuery(result) {}
   LoggedQuery(const QString& query = QString(),
-              QSqlDatabase db = QSqlDatabase()) : QSqlQuery(query, db) {
-    logQuery(isActive());
-  }
-
+              QSqlDatabase db = QSqlDatabase());
   LoggedQuery(QSqlDatabase db) : QSqlQuery(db) {}
   LoggedQuery(const LoggedQuery& other) : QSqlQuery(other) {}
   virtual ~LoggedQuery() {}

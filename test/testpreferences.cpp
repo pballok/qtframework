@@ -19,7 +19,7 @@ void TestPreferences::destroy() {
 }
 
 void TestPreferences::readSettings(const QSettings* const settings_file) {
-  value_ = settings_file->value(QString::fromAscii("Value"), 0).toUInt();
+  value_ = settings_file->value("Value", 0).toUInt();
 }
 
 void TestPreferences::writeSettings(QSettings* const settings_file) const {

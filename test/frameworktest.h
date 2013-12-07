@@ -1,7 +1,7 @@
 #ifndef FRAMEWORKTEST_H
 #define FRAMEWORKTEST_H
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 class FrameworkTest : public QObject {
 
