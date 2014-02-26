@@ -1,7 +1,7 @@
 #include "logger.h"
 #include "logwriter.h"
 
-Logger* Logger::instance_ = NULL;
+Logger* Logger::instance_ = nullptr;
 
 Logger& Logger::instance() {
   if (!instance_) {
@@ -23,11 +23,8 @@ void Logger::registerWriter(LogWriter* const writer) {
   writers_.append(writer);
 }
 
-void Logger::writeMessage(const Severity::SeverityType severity,
-                          const QString& message) const {
-  for( QList<LogWriter*>::const_iterator it = writers_.begin();
-       it != writers_.end();
-       ++it ) {
-    (*it)->writeMessage(severity, message);
+void Logger::writeMessage(const Severity severity, const QString& message) const {
+  for(LogWriter* w : writers_) {
+    w->writeMessage(severity, message);
   }
 }

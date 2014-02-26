@@ -2,6 +2,7 @@ QT          += core sql widgets testlib
 TARGET       = test
 TEMPLATE     = app
 INCLUDEPATH += ..
+CONFIG      += c++11
 
 SOURCES     += ../consolewriter.cpp \
                ../filewriter.cpp \
@@ -10,6 +11,7 @@ SOURCES     += ../consolewriter.cpp \
                ../logger.cpp \
                ../logmessage.cpp \
                ../preferences.cpp \
+               ../severity.cc \
                ../tracer.cpp \
                main.cpp \
                frameworktest.cpp \

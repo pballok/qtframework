@@ -1,31 +1,14 @@
 #ifndef SEVERITY_H
 #define SEVERITY_H
 
-class Severity {
- public:
-  enum SeverityType {
-    MIN = 0,
-    NONE,
-    ERROR,
-    WARNING,
-    INFO,
-    DEBUG,
-    MAX
-  };
+#include <string>
+#include <iostream>
+#include <QTextStream>
 
-  static const char *toStr(SeverityType severity) {
-    switch (severity) {
-      case NONE:    return "NONE";    break;
-      case ERROR:   return "ERROR";   break;
-      case WARNING: return "WARNING"; break;
-      case INFO:    return "INFO";    break;
-      case DEBUG:   return "DEBUG";   break;
-      default:      return "INVALID";
-    }
-  }
+enum class Severity { NONE, ERROR, WARNING, INFO, DEBUG };
 
- private:
-  Severity() {}
-};
+std::string& severityToString(Severity s);
+std::ostream& operator<<(std::ostream& os, const Severity& s);
+QTextStream& operator<<(QTextStream& os, const Severity& s);
 
 #endif // SEVERITY_H

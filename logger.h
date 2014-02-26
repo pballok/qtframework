@@ -17,10 +17,9 @@ class Logger {
   
   void  registerWriter(LogWriter* const writer);
 
-  void  writeMessage(const Severity::SeverityType severity,
-                     const QString& message ) const;
+  void  writeMessage(const Severity severity, const QString& message ) const;
 
-  inline LogMessage operator<<(const Severity::SeverityType severity) const {
+  inline LogMessage operator<<(const Severity severity) const {
     return LogMessage(severity);
   }
 
@@ -30,9 +29,9 @@ class Logger {
   }
 
  private:
-  Logger() {}
-  Logger(Logger const&) {}
-  Logger& operator=(Logger const&) {return *this;}
+  Logger();
+  Logger(Logger const&);
+  Logger& operator=(Logger const&);
 
   static Logger*     instance_;
   QList<LogWriter*>  writers_;

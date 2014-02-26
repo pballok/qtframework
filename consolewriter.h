@@ -1,18 +1,22 @@
 #ifndef CONSOLEWRITER_H
 #define CONSOLEWRITER_H
 
+#include <QString>
+
 #include "logwriter.h"
+#include "severity.h"
 
 class ConsoleWriter : public LogWriter {
  public:
-  ConsoleWriter(const Severity::SeverityType severity) : LogWriter(severity) {}
+  explicit ConsoleWriter(const Severity severity) : LogWriter(severity) {}
   virtual ~ConsoleWriter() {}
 
-  virtual void writeMessage(const Severity::SeverityType severity,
-                            const QString& message ) throw();
+  virtual void writeMessage(const Severity severity,const QString& message ) throw();
 
- protected:
-  ConsoleWriter() {}
+ private:
+  ConsoleWriter();
+  ConsoleWriter(const ConsoleWriter&);
+  void operator=(const ConsoleWriter&);
 };
 
 #endif

@@ -8,17 +8,17 @@
 
 class GUIWriter : public LogWriter {
  public:
-  GUIWriter(Severity::SeverityType severity, QWidget* parent = 0);
+  explicit GUIWriter(Severity severity, QWidget* parent = 0);
   virtual ~GUIWriter();
 
-  virtual void writeMessage(const Severity::SeverityType severity,
-                            const QString& message ) throw();
-
- protected:
-  GUIWriter() : LogWriter() {}
+  virtual void writeMessage(const Severity severity, const QString& message ) throw();
 
  private:
   QWidget*  parent_;
+
+  GUIWriter();
+  GUIWriter(const GUIWriter&);
+  void operator=(const GUIWriter&);
 };
 
 #endif // GUIWRITER_H

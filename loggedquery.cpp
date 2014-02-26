@@ -5,27 +5,26 @@
 
 #include "loggedquery.h"
 
-LoggedQuery::LoggedQuery(const QString& query,QSqlDatabase db)
-    : QSqlQuery(query, db) {
-    if( query != "" ) logQuery(isActive());
+LoggedQuery::LoggedQuery(const QString& query, QSqlDatabase db) : QSqlQuery(query, db) {
+    if(query != "") logQuery();
 }
 
 bool LoggedQuery::exec(const QString& query) {
-  bool result = QSqlQuery::exec(query);
-  logQuery(result);
-  return result;
+  QSqlQuery::exec(query);
+  logQuery();
+  return isActive();
 }
 
 bool LoggedQuery::exec() {
-  bool result = QSqlQuery::exec();
-  logQuery(result);
-  return result;
+  QSqlQuery::exec();
+  logQuery();
+  return isActive();
 }
 
-void LoggedQuery::logQuery(bool success) const {
-  Tracer tracer("LoggedQuery::exec", lastQuery());
+void LoggedQuery::logQuery() const {
+  Tracer tracer("LoggedQuery::logQuery", lastQuery());
 
-  if (success) {
+  if (isActive()) {
     if (isSelect()) {
       tracer << "Returned rows: " << size();
     } else {

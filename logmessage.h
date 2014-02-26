@@ -8,16 +8,10 @@
 
 class LogMessage {
  public:
-  enum LoggerManip {
-    MIN = 0,
-    EOM,
-    CLEAR,
-    MAX
-  };
+  enum class LoggerManip { EOM, CLEAR };
 
-  LogMessage();
-  LogMessage(const Severity::SeverityType severity);
-  LogMessage(const LogMessage& orig_message);
+  explicit LogMessage(const Severity severity);
+  LogMessage(const LogMessage& that);
   ~LogMessage();
 
   template<typename T>
@@ -26,12 +20,15 @@ class LogMessage {
     return *this;
   }
 
-  LogMessage &operator<<(const LoggerManip manipulator);
+  LogMessage& operator<<(const LoggerManip manipulator);
 
  private:
-  Severity::SeverityType severity_;
-  QString                message_;
-  QTextStream            message_stream_;
+  Severity      severity_;
+  QString       message_;
+  QTextStream   message_stream_;
+
+  LogMessage();
+  void operator=(const LogMessage&);
 };
 
 #endif // LOGMESSAGE_H
