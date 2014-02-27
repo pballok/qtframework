@@ -1,7 +1,7 @@
 #include <QSqlError>
 
 #include <tracer.h>
-#include <logger.h>
+#include <logmessage.h>
 
 #include "loggedquery.h"
 
@@ -31,7 +31,6 @@ void LoggedQuery::logQuery() const {
       tracer << "Rows affected: " << numRowsAffected();
     }
   } else {
-    Logger::instance() << Severity::ERROR << "MySQL returned with error: \""
-                       << lastError().text() << "\"";
+    LOG(ERROR) << "MySQL returned with error: \"" << lastError().text() << "\"";
   }
 }

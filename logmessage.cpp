@@ -1,5 +1,4 @@
 #include "logmessage.h"
-#include "logger.h"
 
 LogMessage::LogMessage(const Severity severity)
   : severity_(severity), message_("") {

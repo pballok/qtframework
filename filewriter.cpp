@@ -9,7 +9,7 @@ FileWriter::FileWriter(const Severity severity, const QString& file_name, const 
     case FileMode::BACKUP: {
       if (log_file_.exists()) {
         QString timestamp =
-            QDateTime::currentDateTime().toString("ddMMyyyy_hhmmss_");
+            QDateTime::currentDateTime().toString("ddMMyyyy_hhmmss");
         QString backup_file_name = file_name;
         backup_file_name.append("-").append(timestamp);
         log_file_.copy(backup_file_name);
@@ -36,10 +36,7 @@ FileWriter::~FileWriter() {
 }
 
 void FileWriter::writeMessage(const Severity severity, const QString& message) throw() {
-  if (severity <= min_severity_) {
-    QString timestamp =
-        QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+  QString timestamp = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
 
-    log_stream_ << timestamp << " " << severity << " " << message << endl;
-  }
+  log_stream_ << timestamp << " " << severity << " " << message << endl;
 }

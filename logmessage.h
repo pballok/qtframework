@@ -4,6 +4,7 @@
 #include <QString>
 #include <QTextStream>
 
+#include "logger.h"
 #include "severity.h"
 
 class LogMessage {
@@ -30,5 +31,11 @@ class LogMessage {
   LogMessage();
   void operator=(const LogMessage&);
 };
+
+#define LOG(level) \
+    if (static_cast<int>(Severity::level) < static_cast<int>(Logger::lowest_severity)) ; \
+    else LogMessage(Severity::level)
+
+#define LOG_EOM LogMessage::LoggerManip::EOM
 
 #endif // LOGMESSAGE_H

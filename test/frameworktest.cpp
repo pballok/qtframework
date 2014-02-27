@@ -5,7 +5,7 @@
 #include <QStringList>
 #include <QSqlDatabase>
 
-#include <logger.h>
+#include <logmessage.h>
 #include <filewriter.h>
 #include <loggedquery.h>
 
@@ -32,25 +32,25 @@ void FrameworkTest::fileLogger() {
   QString file_name_3 = "writertest_3.log";
   QFile log_file_3(file_name_3);
 
-  FileWriter file_writer_1(Severity::INFO, file_name_1, FileWriter::APPEND);
+  FileWriter file_writer_1(Severity::INFO, file_name_1, FileWriter::FileMode::APPEND);
   Logger::instance().registerWriter(&file_writer_1);
 
-  FileWriter file_writer_2(Severity::ERROR, file_name_2, FileWriter::BACKUP);
+  FileWriter file_writer_2(Severity::ERROR, file_name_2, FileWriter::FileMode::BACKUP);
   Logger::instance().registerWriter(&file_writer_2);
 
-  FileWriter file_writer_3(Severity::DEBUG, file_name_3, FileWriter::OVERWRITE);
+  FileWriter file_writer_3(Severity::DEBUG, file_name_3, FileWriter::FileMode::OVERWRITE);
   Logger::instance().registerWriter(&file_writer_3);
 
   QDir current_dir = QDir::current();
   QStringList backups =
-      current_dir.entryList(QStringList(QString("*_%1").arg(file_name_2)),
+      current_dir.entryList(QStringList(QString("%1-*").arg(file_name_2)),
                             QDir::Files, QDir::Time | QDir::Reversed);
   QString file_name_4 = backups.first();
   QFile log_file_4(file_name_4);
 
-  Logger::instance() << Severity::INFO << "Message 01" << LogMessage::EOM;
-  Logger::instance() << Severity::DEBUG << "Message 02" << LogMessage::EOM;
-  Logger::instance() << Severity::ERROR << "Message 03" << LogMessage::EOM;
+  LOG(INFO) << "Message 01" << LOG_EOM;
+  LOG(DEBUG) << "Message 02" << LOG_EOM;
+  LOG(ERROR) << "Message 03" << LOG_EOM;
 
   QVERIFY(log_file_1.exists());
   QVERIFY(log_file_1.open(QIODevice::ReadOnly | QIODevice::Text));
@@ -133,7 +133,7 @@ void FrameworkTest::preferences() {
 void FrameworkTest::loggedquery() {
   QString file_name = "test.log";
   QFile log_file(file_name);
-  FileWriter log_writer(Severity::DEBUG, file_name, FileWriter::OVERWRITE);
+  FileWriter log_writer(Severity::DEBUG, file_name, FileWriter::FileMode::OVERWRITE);
   Logger::instance().registerWriter(&log_writer);
 
   QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");

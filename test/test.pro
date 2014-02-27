@@ -11,7 +11,6 @@ SOURCES     += ../consolewriter.cpp \
                ../logger.cpp \
                ../logmessage.cpp \
                ../preferences.cpp \
-               ../severity.cc \
                ../tracer.cpp \
                main.cpp \
                frameworktest.cpp \

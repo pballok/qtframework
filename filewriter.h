@@ -1,12 +1,16 @@
 #ifndef FILEWRITER_H
 #define FILEWRITER_H
 
-#include <QString>
+#include <sstream>
 #include <QFile>
 #include <QTextStream>
 
 #include "logwriter.h"
 #include "severity.h"
+
+class QString;
+class QFile;
+class QStringStream;
 
 class FileWriter : public LogWriter {
  public:
@@ -19,8 +23,8 @@ class FileWriter : public LogWriter {
   virtual void writeMessage(const Severity severity, const QString& message ) throw();
 
  private:
-  QFile       log_file_;
-  QTextStream log_stream_;
+  QFile        log_file_;
+  QTextStream  log_stream_;
 
   FileWriter();
   FileWriter(const FileWriter&);

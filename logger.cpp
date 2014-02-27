@@ -21,10 +21,15 @@ void Logger::destroy() {
 
 void Logger::registerWriter(LogWriter* const writer) {
   writers_.append(writer);
+  if (writer->min_severity() < Logger::lowest_severity)
+    Logger::lowest_severity = writer->min_severity();
 }
 
 void Logger::writeMessage(const Severity severity, const QString& message) const {
   for(LogWriter* w : writers_) {
-    w->writeMessage(severity, message);
+      if (severity >= w->min_severity())
+        w->writeMessage(severity, message);
   }
 }
+
+Severity Logger::lowest_severity = Severity::NONE;

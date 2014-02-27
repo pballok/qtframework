@@ -1,14 +1,18 @@
 #ifndef SEVERITY_H
 #define SEVERITY_H
 
-#include <string>
-#include <iostream>
-#include <QTextStream>
+enum class Severity { DEBUG, INFO, WARNING, ERROR, NONE };
 
-enum class Severity { NONE, ERROR, WARNING, INFO, DEBUG };
-
-std::string& severityToString(Severity s);
-std::ostream& operator<<(std::ostream& os, const Severity& s);
-QTextStream& operator<<(QTextStream& os, const Severity& s);
+template <typename OS>
+inline OS& operator<<(OS& os, const Severity& s) {
+  switch(s) {
+    case Severity::DEBUG:   return os << "DEB";
+    case Severity::INFO:    return os << "INF";
+    case Severity::WARNING: return os << "WAR";
+    case Severity::ERROR:   return os << "ERR";
+    case Severity::NONE:    return os << "NON";
+    default:                return os << "INVALID SEVERITY";
+  }
+}
 
 #endif // SEVERITY_H
