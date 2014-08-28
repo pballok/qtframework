@@ -1,7 +1,8 @@
 #include "logger.h"
 #include "logwriter.h"
 
-Logger* Logger::instance_ = nullptr;
+Logger*  Logger::instance_ = nullptr;
+Severity Logger::lowest_severity = Severity::NONE;
 
 Logger& Logger::instance() {
   if (!instance_) {
@@ -15,7 +16,7 @@ Logger& Logger::instance() {
 void Logger::destroy() {
   if (instance_) {
     delete instance_;
-    instance_ = NULL;
+    instance_ = nullptr;
   }
 }
 
@@ -31,5 +32,3 @@ void Logger::writeMessage(const Severity severity, const QString& message) const
         w->writeMessage(severity, message);
   }
 }
-
-Severity Logger::lowest_severity = Severity::NONE;

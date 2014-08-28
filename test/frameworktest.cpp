@@ -68,33 +68,33 @@ void FrameworkTest::fileLogger() {
   QVERIFY(!contents_1.isEmpty());
   QVERIFY(contents_1.contains("Old Text 01"));
   QVERIFY(contents_1.contains("Old Text 02"));
-  QVERIFY(contents_1.contains("INFO Message 01"));
-  QVERIFY(!contents_1.contains("DEBUG Message 02"));
-  QVERIFY(contents_1.contains("ERROR Message 03"));
+  QVERIFY(contents_1.contains("INF Message 01"));
+  QVERIFY(!contents_1.contains("DEB Message 02"));
+  QVERIFY(contents_1.contains("ERR Message 03"));
 
   QString contents_2 = log_file_2.readAll();
   QVERIFY(!contents_2.isEmpty());
   QVERIFY(!contents_2.contains("Old Text 01"));
   QVERIFY(!contents_2.contains("Old Text 02"));
-  QVERIFY(!contents_2.contains("INFO Message 01"));
-  QVERIFY(!contents_2.contains("DEBUG Message 02"));
-  QVERIFY(contents_2.contains("ERROR Message 03"));
+  QVERIFY(!contents_2.contains("INF Message 01"));
+  QVERIFY(!contents_2.contains("DEB Message 02"));
+  QVERIFY(contents_2.contains("ERR Message 03"));
 
   QString contents_3 = log_file_3.readAll();
   QVERIFY(!contents_3.isEmpty());
   QVERIFY(!contents_3.contains("Old Text 01"));
   QVERIFY(!contents_3.contains("Old Text 02"));
-  QVERIFY(contents_3.contains("INFO Message 01"));
-  QVERIFY(contents_3.contains("DEBUG Message 02"));
-  QVERIFY(contents_3.contains("ERROR Message 03"));
+  QVERIFY(contents_3.contains("INF Message 01"));
+  QVERIFY(contents_3.contains("DEB Message 02"));
+  QVERIFY(contents_3.contains("ERR Message 03"));
 
   QString contents_4 = log_file_4.readAll();
   QVERIFY(!contents_4.isEmpty());
   QVERIFY(contents_4.contains("Old Text 01"));
   QVERIFY(contents_4.contains("Old Text 02"));
-  QVERIFY(!contents_4.contains("INFO Message 01"));
-  QVERIFY(!contents_4.contains("DEBUG Message 02"));
-  QVERIFY(!contents_4.contains("ERROR Message 03"));
+  QVERIFY(!contents_4.contains("INF Message 01"));
+  QVERIFY(!contents_4.contains("DEB Message 02"));
+  QVERIFY(!contents_4.contains("ERR Message 03"));
 
   Logger::destroy();
 }

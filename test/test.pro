@@ -11,12 +11,14 @@ SOURCES     += ../consolewriter.cpp \
                ../logger.cpp \
                ../logmessage.cpp \
                ../preferences.cpp \
+               ../severity.cpp \
                ../tracer.cpp \
                main.cpp \
                frameworktest.cpp \
                testpreferences.cpp
 
 HEADERS     += ../consolewriter.h \
+               ../enum_to_string.h \
                ../filewriter.h \
                ../guiwriter.h \
                ../loggedquery.h \
