@@ -170,3 +170,13 @@ void FrameworkTest::loggedquery() {
 
   Logger::destroy();
 }
+
+void FrameworkTest::enumToString() {
+    QCOMPARE(QString("DEB"), EnumToString<Severity>::toString(Severity::DEBUG));
+    QCOMPARE(QString("WAR"), EnumToString<Severity>::toString(Severity::WARNING));
+    QCOMPARE(QString("UNKNOWN ENUM VALUE"), EnumToString<Severity>::toString(Severity::UNDEFINED));
+
+    QVERIFY(Severity::DEBUG == EnumToString<Severity>::fromString("DEB"));
+    QVERIFY(Severity::WARNING == EnumToString<Severity>::fromString("WAR"));
+    QVERIFY(Severity::UNDEFINED == EnumToString<Severity>::fromString("RANDOM_STRING"));
+}

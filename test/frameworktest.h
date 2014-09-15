@@ -11,6 +11,7 @@ class FrameworkTest : public QObject {
   void fileLogger();
   void preferences();
   void loggedquery();
+  void enumToString();
 };
 
 #endif

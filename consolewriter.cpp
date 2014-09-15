@@ -11,5 +11,5 @@ using namespace std;
 void ConsoleWriter::writeMessage(const Severity severity, const QString& message) throw() {
   QString timestamp = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
 
-  cerr << timestamp.toStdString() << " " << enumToString(severity) << " " << message.toStdString() << endl;
+  cerr << timestamp.toStdString() << " " << severity << " " << message.toStdString() << endl;
 }

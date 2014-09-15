@@ -23,13 +23,4 @@ private:
     static const MapType map_;
 };
 
-template<typename T>
-std::string enumToString(const T& e) {
-    return EnumToString<T>::toString(e).toStdString();
-}
-
-template<typename T>
-QString enumToQString(const T& e) {
-    return EnumToString<T>::toString(e);
-}
 #endif

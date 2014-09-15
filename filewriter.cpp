@@ -38,5 +38,5 @@ FileWriter::~FileWriter() {
 void FileWriter::writeMessage(const Severity severity, const QString& message) throw() {
   QString timestamp = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
 
-  log_stream_ << timestamp << " " << enumToQString(severity) << " " << message << endl;
+  log_stream_ << timestamp << " " << severity << " " << message << endl;
 }
