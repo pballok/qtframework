@@ -6,32 +6,33 @@
 #include <preferences.h>
 
 class TestPreferences : public Preferences {
- public:
-  static TestPreferences& instance();
-  static void destroy();
+public:
 
-  inline int value() const throw() {
-    return value_;
-  }
+    TestPreferences() : Preferences(), value_(0) {
+    }
 
-  inline void set_value(const int value) throw() {
-    value_ = value;
-  }
+    TestPreferences(const QString& app_name, const QString& version)
+        : Preferences(app_name, version),
+          value_(0) {
+    }
 
- protected:
-  TestPreferences() : Preferences(), value_(0) {}
-  TestPreferences(TestPreferences const& prefs) : Preferences(prefs) {}
-  TestPreferences& operator=(TestPreferences const& prefs) {
-    Preferences::operator=(prefs);
-    return *this;
-  }
-  virtual ~TestPreferences() {}
+    ~TestPreferences() {
+    }
 
-  virtual void readSettings(const QSettings* const settings_file);
-  virtual void writeSettings(QSettings* const settings_file) const;
+    int value() const {
+        return value_;
+    }
 
-  static TestPreferences* instance_;
-  int                     value_;
+    void set_value(int value) {
+        value_ = value;
+    }
+
+protected:
+
+  virtual void readSettings(const QSettings& settings_file);
+  virtual void writeSettings(QSettings& settings_file) const;
+
+  int    value_;
 };
 
 #endif // TESTPREFERENCES_H
