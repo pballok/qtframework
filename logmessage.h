@@ -4,20 +4,15 @@
 #include <QString>
 #include <QTextStream>
 
+#include "logger.h"
 #include "severity.h"
 
 class LogMessage {
  public:
-  enum LoggerManip {
-    MIN = 0,
-    EOM,
-    CLEAR,
-    MAX
-  };
+  enum class LoggerManip { EOM, CLEAR };
 
-  LogMessage();
-  LogMessage(const Severity::SeverityType severity);
-  LogMessage(const LogMessage& orig_message);
+  explicit LogMessage(const Severity severity);
+  LogMessage(const LogMessage& that);
   ~LogMessage();
 
   template<typename T>
@@ -26,12 +21,21 @@ class LogMessage {
     return *this;
   }
 
-  LogMessage &operator<<(const LoggerManip manipulator);
+  LogMessage& operator<<(const LoggerManip manipulator);
 
  private:
-  Severity::SeverityType severity_;
-  QString                message_;
-  QTextStream            message_stream_;
+  Severity      severity_;
+  QString       message_;
+  QTextStream   message_stream_;
+
+  LogMessage();
+  void operator=(const LogMessage&);
 };
+
+#define LOG(level) \
+    if (static_cast<int>(Severity::level) < static_cast<int>(Logger::lowest_severity)) ; \
+    else LogMessage(Severity::level)
+
+#define LOG_EOM LogMessage::LoggerManip::EOM
 
 #endif // LOGMESSAGE_H

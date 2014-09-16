@@ -1,28 +1,24 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include <QString>
 #include <QList>
 
 #include "severity.h"
 #include "sevexception.h"
-#include "logmessage.h"
 
 class LogWriter;
+class QString;
 
 class Logger {
  public:
+  static Severity lowest_severity;
+
   static Logger& instance();
   static void destroy();
   
   void  registerWriter(LogWriter* const writer);
 
-  void  writeMessage(const Severity::SeverityType severity,
-                     const QString& message ) const;
-
-  inline LogMessage operator<<(const Severity::SeverityType severity) const {
-    return LogMessage(severity);
-  }
+  void  writeMessage(const Severity severity, const QString& message ) const;
 
   inline Logger& operator<<(const SevException& exception) {
     writeMessage(exception.severity(), exception.what());
@@ -31,8 +27,8 @@ class Logger {
 
  private:
   Logger() {}
-  Logger(Logger const&) {}
-  Logger& operator=(Logger const&) {return *this;}
+  Logger(Logger const&);
+  Logger& operator=(Logger const&);
 
   static Logger*     instance_;
   QList<LogWriter*>  writers_;

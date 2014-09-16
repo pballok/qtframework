@@ -1,20 +1,15 @@
 #include <QDateTime>
-#include <QString>
 
 #include <iostream>
 #include <iomanip>
 
 #include "consolewriter.h"
+#include "severity.h"
 
 using namespace std;
 
-void ConsoleWriter::writeMessage(const Severity::SeverityType severity,
-                                 const QString& message) throw() {
-  if (severity <= min_severity_) {
-    QString timestamp =
-        QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
+void ConsoleWriter::writeMessage(const Severity severity, const QString& message) throw() {
+  QString timestamp = QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss");
 
-    cerr << timestamp.toStdString() << " " << Severity::toStr(severity) << " "
-         << message.toStdString() << endl;
-  }
+  cerr << timestamp.toStdString() << " " << severity << " " << message.toStdString() << endl;
 }
